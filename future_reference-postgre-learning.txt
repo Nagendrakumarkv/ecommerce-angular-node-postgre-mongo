@@ -1,0 +1,1547 @@
+15-Day PostgreSQL Learning Plan with E-commerce Project
+
+Day 1: Setup and Basic PostgreSQL Concepts
+
+Theory (1 hour):
+Install PostgreSQL (latest version, e.g., 16.x) and pgAdmin or DBeaver.
+Understand PostgreSQL architecture: server, database, schema, tables.
+Review basic SQL: SELECT, INSERT, UPDATE, DELETE, WHERE.
+
+Practice (1 hour):
+Create a database ecommerce_db and a schema ecommerce.
+Create a users table (user_id, username, email, password_hash, created_at).
+Insert 5 sample users using INSERT.
+
+Project Task (0.5 hour):
+Design the initial schema for the e-commerce project: identify tables (users, products, orders, reviews).
+Resources: PostgreSQL official docs (installation guide), W3Schools SQL basics.
+
+Day 2: Data Types and Constraints
+
+Theory (1 hour):
+Learn PostgreSQL data types: INTEGER, VARCHAR, TEXT, TIMESTAMP, JSONB, UUID.
+Study constraints: PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, CHECK.
+
+Practice (1 hour):
+Create a products table (product_id, name, price, stock, description, category_id).
+Add constraints: product_id as SERIAL PRIMARY KEY, price with CHECK (price > 0), name as NOT NULL.
+Insert 10 sample products.
+
+Project Task (0.5 hour):
+Create a categories table and link it to products via FOREIGN KEY.
+Resources: PostgreSQL docs on data types and constraints.
+
+Day 3: Advanced SELECT Queries
+
+Theory (1 hour):
+Learn JOIN types (INNER, LEFT, RIGHT, FULL).
+Study aggregate functions: COUNT, SUM, AVG, MIN, MAX.
+Understand GROUP BY, HAVING, and ORDER BY.
+
+Practice (1 hour):
+Write queries to:
+Join products and categories to list products with category names.
+Calculate total stock per category using GROUP BY.
+Filter categories with more than 3 products using HAVING.
+
+Project Task (0.5 hour):
+Query the products table to display products sorted by price.
+Resources: SQLZoo JOIN tutorial, PostgreSQL docs on aggregates.
+
+Day 4: Indexes and Query Performance
+Theory (1 hour):
+Understand indexes: B-tree, Hash, GIN (for JSONB), BRIN.
+Learn CREATE INDEX, EXPLAIN, and ANALYZE.
+
+Practice (1 hour):
+Create an index on products(name) for faster searches.
+Use EXPLAIN to compare query performance with/without index.
+Add a FULLTEXT index for product descriptions (use tsvector).
+
+Project Task (0.5 hour):
+Optimize a product search query for the e-commerce site.
+Resources: PostgreSQL docs on indexes, PGtune for performance tips.
+
+Day 5: Subqueries and CTEs
+Theory (1 hour):
+Learn subqueries: correlated and non-correlated.
+Understand Common Table Expressions (CTEs) with WITH clause.
+
+Practice (1 hour):
+Write a subquery to find products with above-average price.
+Convert the subquery to a CTE for readability.
+Use a correlated subquery to find users who ordered specific products.
+
+Project Task (0.5 hour):
+Create an orders table (order_id, user_id, order_date, total_amount) and populate it.
+Write a CTE to list users with their total order amounts.
+Resources: PostgreSQL docs on CTEs, Stack Overflow SQL examples.
+
+Day 6: Transactions and Concurrency
+Theory (1 hour):
+Learn transactions: BEGIN, COMMIT, ROLLBACK.
+Understand isolation levels: READ COMMITTED, SERIALIZABLE.
+Study LOCK mechanisms and deadlocks.
+
+Practice (1 hour):
+Simulate an order placement with a transaction:
+Decrease stock in products.
+Insert a new row in orders.
+Roll back if stock is insufficient.
+Test concurrent updates to products.stock using two sessions.
+
+Project Task (0.5 hour):
+Implement a transaction to handle order creation in the e-commerce system.
+Resources: PostgreSQL docs on transactions, PG Exercises.
+
+Day 7: Views and Materialized Views
+Theory (1 hour):
+Learn CREATE VIEW for simplified queries.
+Understand materialized views for performance.
+Study REFRESH MATERIALIZED VIEW.
+
+Practice (1 hour):
+Create a view for active products (stock > 0).
+Create a materialized view for total sales per category.
+Refresh the materialized view after inserting new orders.
+
+Project Task (0.5 hour):
+Create a view for the e-commerce dashboard (e.g., top 5 products by sales).
+Resources: PostgreSQL docs on views, PG Casts.
+
+Day 8: Functions and Stored Procedures
+Theory (1 hour):
+Learn CREATE FUNCTION with PL/pgSQL.
+Understand stored procedures (CALL) and parameters.
+
+Practice (1 hour):
+Write a function to calculate total order value for a user.
+Create a procedure to restock products (increase stock by a given amount).
+Call the procedure for a specific product.
+
+Project Task (0.5 hour):
+Write a function to apply a discount to products in a specific category.
+Resources: PostgreSQL docs on PL/pgSQL, TutorialsPoint.
+
+Day 9: Triggers
+Theory (1 hour):
+Learn CREATE TRIGGER and trigger functions.
+Understand BEFORE, AFTER, and INSTEAD OF triggers.
+
+Practice (1 hour):
+Create a trigger to update products.stock after an order is placed.
+Create a trigger to log user updates in a user_audit table.
+
+Project Task (0.5 hour):
+Implement a trigger to prevent negative stock in the products table.
+Resources: PostgreSQL docs on triggers, PG Exercises.
+
+Day 10: JSONB and Advanced Data Types
+Theory (1 hour):
+Learn JSONB for semi-structured data.
+Study operators: ->, ->>, @>, #>>.
+Understand indexing for JSONB (GIN).
+
+Practice (1 hour):
+Add a JSONB column to products for attributes (e.g., color, size).
+Query products with specific attributes using JSONB operators.
+Create a GIN index on the JSONB column.
+
+Project Task (0.5 hour):
+Store product specifications (e.g., {"color": "blue", "size": "M"}) in JSONB and query them.
+Resources: PostgreSQL docs on JSONB, EDB Postgres tutorials.
+
+Day 11: Advanced Indexing and Full-Text Search
+Theory (1 hour):
+Deep dive into GIN, GiST, and BRIN indexes.
+Learn full-text search with tsvector and tsquery.
+
+Practice (1 hour):
+Implement full-text search on products.description.
+Create a GiST index for spatial data (e.g., store locations, if applicable).
+Compare performance with EXPLAIN.
+
+Project Task (0.5 hour):
+Add a full-text search feature for the e-commerce product catalog.
+Resources: PostgreSQL docs on full-text search, PGConf talks.
+
+Day 12: Partitioning and Sharding
+Theory (1 hour):
+Learn table partitioning: range, list, hash.
+Understand sharding concepts (basic overview).
+
+Practice (1 hour):
+Partition the orders table by order_date (range partitioning, e.g., by year).
+Query partitioned data and compare performance.
+
+Project Task (0.5 hour):
+Partition the orders table for the e-commerce project to improve query speed.
+Resources: PostgreSQL docs on partitioning, Citus Data blog.
+
+Day 13: Security and User Management
+Theory (1 hour):
+Learn CREATE ROLE, GRANT, REVOKE.
+Understand row-level security (RLS).
+
+Practice (1 hour):
+Create roles: admin, customer, guest.
+Grant read-only access to customer for products.
+Implement RLS on orders to restrict users to their own orders.
+
+
+Project Task (0.5 hour):
+Set up RLS for the e-commerce orders table to ensure users only see their data.
+Resources: PostgreSQL docs on roles and RLS.
+
+Day 14: Backup, Restore, and Performance Tuning
+Theory (1 hour):
+Learn pg_dump and pg_restore for backups.
+Study performance tuning: work_mem, shared_buffers, vacuum.
+
+Practice (1 hour):
+Back up ecommerce_db using pg_dump.
+Restore the database to a new instance.
+Run VACUUM and ANALYZE on products.
+
+Project Task (0.5 hour):
+Create a backup script for the e-commerce database.
+Resources: PostgreSQL docs on backup, PGtune.
+
+Day 15: Project Completion and Review
+Theory (1 hour):
+Review all concepts: joins, indexes, transactions, triggers, JSONB, partitioning, security.
+Learn basic integration with a backend (e.g., Node.js, Python Flask).
+
+Practice (1 hour):
+Write complex queries for the e-commerce site:
+Top 5 customers by order value.
+Products low in stock (< 10 units).
+Full-text search with ranking.
+Connect the database to a simple backend (e.g., Node.js with pg library) to display products.
+
+Project Task (1 hour):
+Finalize the e-commerce database:
+Ensure all tables (users, products, categories, orders, reviews) are populated.
+Implement a simple API endpoint to list products.
+Test the system with sample data (100 products, 50 orders).
+Resources: PostgreSQL Node.js tutorial, Flask-SQLAlchemy docs.
+
+-----------------------------------------------------------------------------------------------------------------
+
+E-commerce Project Schema Overview
+
+Tables:
+users: user_id (SERIAL PK), username (VARCHAR), email (VARCHAR UNIQUE), password_hash (VARCHAR), created_at (TIMESTAMP).
+categories: category_id (SERIAL PK), name (VARCHAR).
+products: product_id (SERIAL PK), name (VARCHAR), price (NUMERIC CHECK > 0), stock (INTEGER), description (TEXT), category_id (FK), attributes (JSONB).
+orders: order_id (SERIAL PK), user_id (FK), order_date (TIMESTAMP), total_amount (NUMERIC).
+reviews: review_id (SERIAL PK), product_id (FK), user_id (FK), rating (INTEGER CHECK 1-5), comment (TEXT).
+
+Features:
+
+Product search (full-text and JSONB).
+Order processing with stock updates (transactions, triggers).
+User-specific data access (RLS).
+Dashboard views (views, materialized views).
+
+Tips for Success
+Daily Routine: Spend 1 hour on theory, 1-1.5 hours on practice, and 0.5-1 hour on the project.
+Environment: Use PostgreSQL 16.x, pgAdmin/DBeaver, and a code editor (e.g., VSCode) for backend integration.
+Resources: Supplement with PostgreSQL docs, PG Exercises, and YouTube tutorials (e.g., Tech With Tim, Amigoscode).
+Testing: Test queries with sample data to ensure correctness.
+Backup: Save your progress daily using pg_dump.
+
+Final Notes
+By Day 15, you’ll have a functional e-commerce database with advanced PostgreSQL features like triggers, JSONB, and RLS. The backend integration is basic but sufficient to demonstrate functionality.
+If you need specific tools (e.g., Node.js setup) or face issues, let me know, and I can provide code snippets or guidance.
+To extend the project, consider adding a front-end (e.g., React) or advanced features like recommendation systems after the 15 days.
+Would you like me to provide sample SQL code for any specific day or table setup?
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Here’s a simple representation using markdown-based diagram:
+
+users ───< orders ───< order_items >───> products >─── reviews
+                                          ^
+                                          |
+                                     categories
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Day 1: Setup and Basic PostgreSQL Concepts
+
+
+-- Create database
+CREATE DATABASE ecommerce_db;
+
+--Create schema
+CREATE SCHEMA ecommerce;
+
+-- Create users table
+CREATE TABLE ecommerce.users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create categories table
+CREATE TABLE ecommerce.categories (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+-- Create products table
+CREATE TABLE ecommerce.products (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price NUMERIC(10, 2) CHECK (price > 0),
+    stock INTEGER CHECK (stock >= 0),
+    description TEXT,
+    category_id INTEGER NOT NULL,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES ecommerce.categories(category_id)
+);
+
+-- Create orders table
+CREATE TABLE ecommerce.orders (
+    order_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount NUMERIC(10, 2) CHECK (total_amount >= 0),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES ecommerce.users(user_id)
+);
+
+-- Create reviews table
+CREATE TABLE ecommerce.reviews (
+    review_id SERIAL PRIMARY KEY,
+    product_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES ecommerce.products(product_id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES ecommerce.users(user_id)
+);
+
+-- Create order_items table
+CREATE TABLE IF NOT EXISTS ecommerce.order_items (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL CHECK (quantity > 0),
+    unit_price NUMERIC(10, 2) NOT NULL CHECK (unit_price >= 0),
+    CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES ecommerce.orders(order_id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES ecommerce.products(product_id)
+);
+
+-- Insert sample data into users table
+INSERT INTO ecommerce.users (username, email, password_hash) VALUES
+    ('john_doe', 'john@example.com', 'hashed_password_1'),
+    ('jane_smith', 'jane@example.com', 'hashed_password_2'),
+    ('alice_brown', 'alice@example.com', 'hashed_password_3'),
+    ('bob_jones', 'bob@example.com', 'hashed_password_4'),
+    ('emma_wilson', 'emma@example.com', 'hashed_password_5');
+
+-- Insert sample data into categories table
+INSERT INTO ecommerce.categories (name) VALUES
+    ('Electronics'),
+    ('Clothing'),
+    ('Books'),
+    ('Home & Kitchen'),
+    ('Sports');
+
+-- Insert sample data into products table
+INSERT INTO ecommerce.products (name, price, stock, description, category_id) VALUES
+    ('Smartphone X', 699.99, 15, 'Latest 5G smartphone with 128GB storage', 1),
+    ('Laptop Pro', 1299.99, 8, 'High-performance laptop with 16GB RAM', 1),
+    ('T-Shirt Blue', 19.99, 50, 'Comfortable cotton t-shirt, size M', 2),
+    ('Novel: Adventure', 14.99, 30, 'Bestselling adventure novel', 3),
+    ('Coffee Maker', 49.99, 20, 'Automatic drip coffee maker', 4),
+    ('Yoga Mat', 29.99, 25, 'Non-slip yoga mat for fitness', 5);
+
+-- Insert sample data into orders table
+INSERT INTO ecommerce.orders (user_id, order_date, total_amount) VALUES
+    (1, '2025-06-01 10:00:00', 719.98),
+    (2, '2025-06-02 14:30:00', 1349.98),
+    (3, '2025-06-03 09:15:00', 19.99),
+    (4, '2025-06-04 16:45:00', 64.98),
+    (5, '2025-06-05 11:20:00', 29.99);
+
+-- Insert sample data into reviews table
+INSERT INTO ecommerce.reviews (product_id, user_id, rating, comment) VALUES
+    (1, 1, 5, 'Amazing phone, great performance!'),
+    (1, 2, 4, 'Good value for money, but battery could be better.'),
+    (2, 3, 5, 'Laptop is super fast, love it!'),
+    (3, 4, 3, 'T-shirt is okay, but color faded after wash.'),
+    (4, 5, 4, 'Enjoyed the book, great story.'),
+    (5, 1, 4, 'Coffee maker works well, easy to use.');
+
+-- Insert sample data into order_items table
+INSERT INTO ecommerce.order_items (order_id, product_id, quantity, unit_price) VALUES
+    (1, 1, 1, 699.99),
+    (1, 3, 1, 19.99),
+    (2, 2, 1, 149.99),
+    (3, 3, 1, 19.99),
+    (4, 7, 1, 49.99),
+    (4, 5, 1, 14.99),
+    (5, 9, 1, 29.99);
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+Example schema outline
+
+users: (user_id [PK], username, email [UNIQUE], password_hash, created_at)
+categories: (category_id [PK], name)
+products: (product_id [PK], name, price, stock, description, category_id [FK])
+orders: (order_id [PK], user_id [FK], order_date, total_amount)
+reviews: (review_id [PK], product_id [FK], user_id [FK], rating, comment)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 2: Data Types and Constraints
+
+-- Create categories table
+CREATE TABLE IF NOT EXISTS ecommerce.categories (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+-- Create products table
+CREATE TABLE IF NOT EXISTS ecommerce.products (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price NUMERIC(10, 2) CHECK (price > 0),
+    stock INTEGER CHECK (stock >= 0),
+    description TEXT,
+    category_id INTEGER NOT NULL,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES ecommerce.categories(category_id)
+);
+
+-- Insert sample categories
+INSERT INTO ecommerce.categories (name) VALUES
+    ('Electronics'),
+    ('Clothing'),
+    ('Books'),
+    ('Home & Kitchen'),
+    ('Sports');
+
+-- Insert sample products
+INSERT INTO ecommerce.products (name, price, stock, description, category_id) VALUES
+    ('Smartphone X', 699.99, 15, 'Latest 5G smartphone with 128GB storage', 1),
+    ('Wireless Earbuds', 149.99, 25, 'Noise-cancelling earbuds with 20h battery', 1),
+    ('T-Shirt Blue', 19.99, 50, 'Comfortable cotton t-shirt, size M', 2),
+    ('Jeans Slim Fit', 49.99, 30, 'Durable denim jeans, size 32', 2),
+    ('Novel: Mystery', 14.99, 40, 'Bestselling mystery novel', 3),
+    ('Cookbook', 24.99, 20, 'Recipes for home cooking', 3),
+    ('Coffee Maker', 49.99, 15, 'Automatic drip coffee maker', 4),
+    ('Blender', 79.99, 10, 'High-power blender for smoothies', 4),
+    ('Yoga Mat', 29.99, 25, 'Non-slip yoga mat for fitness', 5),
+    ('Tennis Racket', 89.99, 12, 'Professional-grade tennis racket', 5);
+
+-- Verify data
+SELECT * FROM ecommerce.categories;
+SELECT * FROM ecommerce.products;
+
+--Join table
+SELECT p.name, p.price, c.name AS category_name
+FROM ecommerce.products p
+JOIN ecommerce.categories c ON p.category_id = c.category_id;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 3: Advanced SELECT Queries
+
+select * from ecommerce.categories;
+select * from ecommerce.products;
+
+insert into ecommerce.categories (name) values ('Furniture');
+insert into ecommerce.products (name, price, stock, description, category_id) values ('Iphone 12', 800, 20, 'Latest iphone in market', 1);
+
+--INNER JOIN
+select p.name, p.price, c.name as category_name
+from ecommerce.products p
+inner join ecommerce.categories c
+on p.category_id = c.category_id;
+
+--LEFT JOIN
+select p.name, p.price, c.name as category_name
+from ecommerce.products p
+left join ecommerce.categories c
+on p.category_id = c.category_id;
+
+--RIGHT JOIN
+select p.name, p.price, c.name as category_name
+from ecommerce.products p
+right join ecommerce.categories c
+on p.category_id = c.category_id;
+
+--FULL JOIN
+select p.name, p.price, c.name as category_name
+from ecommerce.products p
+right join ecommerce.categories c
+on p.category_id = c.category_id;
+
+--Aggregate Functions
+select c.name as category_name, count(p.product_id) as product_count,
+sum(p.stock) as total_stock,
+avg(p.price) as avg_price,
+min(p.price) as min_price,
+max(p.price) as max_price
+from ecommerce.categories c
+left join ecommerce.products p on c.category_id = p.category_id
+group by c.name;
+
+--GROUP BY, HAVING, ORDER BY
+select c.name as category_name, count(p.product_id) as product_count
+from ecommerce.categories c
+left join ecommerce.products p on c.category_id = p.category_id
+group by c.name
+having count(p.product_id) > 1
+order by product_count DESC;
+
+-- Join products and categories to List Products with Category Names
+SELECT p.name, p.price, p.stock, c.name AS category_name
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id;
+
+--Calculate Total Stock per Category Using GROUP BY
+select c.name as category_name, sum(p.stock) as product_stock
+from ecommerce.categories c
+left join ecommerce.products p on c.category_id = p.category_id
+group by c.name;
+
+--Filter Categories with More Than 2 Products Using HAVING
+select c.name as categoty_name, count(p.product_id) as product_count
+from ecommerce.categories c
+left join ecommerce.products p on c.category_id = p.category_id
+group by c.name
+having count(p.product_id) > 2;
+
+--Query the products Table to Display Products Sorted by Price
+SELECT p.name, p.price, p.stock, c.name AS category_name
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id
+order by p.price DESC;
+
+--DELETE
+delete from ecommerce.categories where category_id = 6;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 4: Indexes and Query Performance
+
+select * from ecommerce.products;
+
+select * from ecommerce.products where name = 'Smartphone X';
+
+select * from ecommerce.products where name = 'Iphone 12';
+
+-- Compare performance with EXPLAIN before indexing
+explain select * from ecommerce.products where name = 'Smartphone X';
+
+-- Create B-tree index on products(name)
+create index inx_products_name on ecommerce.products (name);
+
+-- Compare performance with EXPLAIN after indexing
+explain select * from ecommerce.products where name = 'Smartphone X';
+
+-- Add tsvector column for full-text search
+alter table ecommerce.products
+add column if not exists description_tsvector tsvector
+generated always as (to_tsvector('english',description)) stored;
+
+-- Create GIN index for full-text search
+create index idx_products_desciption_tsvector on ecommerce.products using GIN(description_tsvector);
+
+-- Test full-text search
+select name, description 
+from ecommerce.products
+where description_tsvector @@ to_tsquery('smartphone & 5G');
+
+select name, description 
+from ecommerce.products
+where description_tsvector @@ to_tsquery('Durable & size');
+
+select name, description 
+from ecommerce.products
+where description_tsvector @@ to_tsquery('smartphone | Durable');
+
+-- Project task: Optimized product search
+select p.name, p.description, p.price, c.name as category_name
+from ecommerce.products p
+inner join ecommerce.categories c
+on p.category_id = c.category_id
+where description_tsvector @@ to_tsquery('smartphone | Durable') 
+or p.name ILIKE '%smartphone%'
+order by p.price desc;
+
+
+-- Verify optimization
+explain analyze
+select p.name, p.description, p.price, c.name as category_name
+from ecommerce.products p
+inner join ecommerce.categories c
+on p.category_id = c.category_id
+where description_tsvector @@ to_tsquery('smartphone | Durable') 
+or p.name ILIKE '%smartphone%'
+order by p.price desc;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 5: Subqueries and CTEs
+
+-- Create users table
+CREATE TABLE ecommerce.users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample data into users table
+INSERT INTO ecommerce.users (username, email, password_hash) VALUES
+    ('john_doe', 'john@example.com', 'hashed_password_1'),
+    ('jane_smith', 'jane@example.com', 'hashed_password_2'),
+    ('alice_brown', 'alice@example.com', 'hashed_password_3'),
+    ('bob_jones', 'bob@example.com', 'hashed_password_4'),
+    ('emma_wilson', 'emma@example.com', 'hashed_password_5');
+
+--Select users
+select * from ecommerce.users;
+	
+-- Create orders table (if not exists)
+CREATE TABLE IF NOT EXISTS ecommerce.orders (
+    order_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount NUMERIC(10, 2) CHECK (total_amount >= 0),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES ecommerce.users(user_id)
+);
+
+-- Insert sample data into reviews table
+INSERT INTO ecommerce.orders (user_id, order_date, total_amount) VALUES
+    (1, '2025-06-01 10:00:00', 719.98),
+    (2, '2025-06-02 14:30:00', 149.99),
+    (3, '2025-06-03 09:15:00', 19.99),
+    (4, '2025-06-04 16:45:00', 64.98),
+    (5, '2025-06-05 11:20:00', 29.99),
+	(1, '2025-06-01 11:00:00', 500 );
+
+-- Select orders
+select * from ecommerce.orders
+
+-- Select products
+select * from ecommerce.products;
+
+-- Subquery: Products with above-average price
+select name, price
+from ecommerce.products
+where price > (select avg(price) as avg_price from ecommerce.products)
+order by price desc
+
+-- CTE: Convert above subquery
+with avg_price as (
+select avg(price) as avg_price 
+from ecommerce.products
+)
+select p.name, p.price
+from ecommerce.products p, avg_price
+where p.price > avg_price.avg_price
+order by price desc
+
+-- Correlated subquery: Users with orders
+select u.username
+from ecommerce.users u
+where exists ( select 1 from ecommerce.orders o where o.user_id = u.user_id)
+
+-- Project task: CTE for users' total order amounts
+with user_orders as (
+select u.username, sum(o.total_amount) as total_spent
+from ecommerce.users u
+left join ecommerce.orders o
+on u.user_id = o.user_id
+group by u.username
+)
+select username, total_spent
+from user_orders
+where total_spent is not null
+order by total_spent desc
+
+-- Create order_items table
+CREATE TABLE IF NOT EXISTS ecommerce.order_items (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL CHECK (quantity > 0),
+    unit_price NUMERIC(10, 2) NOT NULL CHECK (unit_price >= 0),
+    CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES ecommerce.orders(order_id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES ecommerce.products(product_id)
+);
+
+-- Populate order_items
+INSERT INTO ecommerce.order_items (order_id, product_id, quantity, unit_price) VALUES
+    (1, 1, 1, 699.99),
+    (1, 3, 1, 19.99),
+    (2, 2, 1, 149.99),
+    (3, 3, 1, 19.99),
+    (4, 7, 1, 49.99),
+    (4, 5, 1, 14.99),
+    (5, 9, 1, 29.99);
+
+-- Query 1: Products ordered by a specific user (subquery)
+SELECT p.name, p.price, c.name AS category_name
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id
+WHERE p.product_id IN (
+    SELECT oi.product_id
+    FROM ecommerce.order_items oi
+    INNER JOIN ecommerce.orders o ON oi.order_id = o.order_id
+    WHERE o.user_id = (SELECT user_id FROM ecommerce.users WHERE username = 'john_doe')
+);
+
+-- Query 2: Products ordered by a specific user (CTE)
+WITH user_products AS (
+    SELECT oi.product_id
+    FROM ecommerce.order_items oi
+    INNER JOIN ecommerce.orders o ON oi.order_id = o.order_id
+    WHERE o.user_id = (SELECT user_id FROM ecommerce.users WHERE username = 'john_doe')
+)
+SELECT p.name, p.price, c.name AS category_name
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id
+WHERE p.product_id IN (SELECT product_id FROM user_products);
+
+-- Query 3: Users who ordered high-priced products (correlated subquery)
+SELECT u.username
+FROM ecommerce.users u
+WHERE EXISTS (
+    SELECT 1
+    FROM ecommerce.orders o
+    INNER JOIN ecommerce.order_items oi ON o.order_id = oi.order_id
+    INNER JOIN ecommerce.products p ON oi.product_id = p.product_id
+    WHERE o.user_id = u.user_id AND p.price > 100
+);
+
+-- Query 4: Top 3 categories by total order value (CTE)
+WITH category_orders AS (
+    SELECT c.name AS category_name, SUM(oi.quantity * oi.unit_price) AS total_value
+    FROM ecommerce.categories c
+    INNER JOIN ecommerce.products p ON c.category_id = p.category_id
+    INNER JOIN ecommerce.order_items oi ON p.product_id = oi.product_id
+    GROUP BY c.name
+)
+SELECT category_name, total_value
+FROM category_orders
+ORDER BY total_value DESC
+LIMIT 3;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 6: Transactions and Concurrency
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+-- Practice 1: Simulate order placement
+DO $$
+DECLARE
+    new_order_id INTEGER;
+BEGIN
+    -- Start transaction
+    BEGIN
+        -- Update stock
+        UPDATE ecommerce.products
+        SET stock = stock - 1
+        WHERE product_id = 1 AND stock >= 1;
+
+        -- Check if stock was updated
+        IF NOT FOUND THEN
+            RAISE EXCEPTION 'Insufficient stock for product_id 1';
+        END IF;
+
+        -- Insert order and capture order_id
+        INSERT INTO ecommerce.orders (user_id, order_date, total_amount)
+        VALUES (1, CURRENT_TIMESTAMP, 699.99)
+        RETURNING order_id INTO new_order_id;
+
+        -- Insert order item using new_order_id
+        INSERT INTO ecommerce.order_items (order_id, product_id, quantity, unit_price)
+        VALUES (new_order_id, 1, 1, 699.99);
+
+        -- Commit is implicit in DO block unless exception occurs
+    EXCEPTION
+        WHEN OTHERS THEN
+            -- Rollback on any error
+            RAISE NOTICE 'Transaction failed: %', SQLERRM;
+            RAISE EXCEPTION 'Rolling back transaction';
+    END;
+END $$;
+
+-- Practice 1: Test rollback
+BEGIN;
+UPDATE ecommerce.products
+SET stock = stock - 100
+WHERE product_id = 1 AND stock >= 100;
+DO $$
+BEGIN
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Insufficient stock for product_id 1';
+    END IF;
+END $$;
+COMMIT;
+
+-- Practice 2: Session 1 (run and pause)
+BEGIN;
+SELECT stock FROM ecommerce.products WHERE product_id = 1 FOR UPDATE;
+UPDATE ecommerce.products SET stock = stock - 2 WHERE product_id = 1;
+--COMMIT; -- Run later
+
+-- Practice 2: Session 2 (run while Session 1 waits)
+BEGIN;
+SELECT stock FROM ecommerce.products WHERE product_id = 1 FOR UPDATE;
+UPDATE ecommerce.products SET stock = stock - 3 WHERE product_id = 1;
+COMMIT;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 7: Views and Materialized Views
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+--Delete rows
+delete from ecommerce.products where product_id = 1;
+
+--Drop table
+drop table ecommerce.products;
+
+-- Practice 1: Create view for active products
+CREATE VIEW ecommerce.active_products AS
+SELECT p.product_id, p.name, p.price, p.stock, c.name AS category_name
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id
+WHERE p.stock > 0;
+
+-- Test view
+SELECT * FROM ecommerce.active_products;
+
+-- Practice 2: Create materialized view for sales by category
+CREATE MATERIALIZED VIEW ecommerce.sales_by_category AS
+SELECT c.name AS category_name, SUM(oi.quantity * oi.unit_price) AS total_sales
+FROM ecommerce.categories c
+INNER JOIN ecommerce.products p ON c.category_id = p.category_id
+INNER JOIN ecommerce.order_items oi ON p.product_id = oi.product_id
+GROUP BY c.name
+WITH DATA;
+
+-- Test materialized view
+SELECT * FROM ecommerce.sales_by_category;
+
+-- Practice 3: Insert new order and refresh materialized view
+DO $$
+DECLARE
+    new_order_id INTEGER;
+BEGIN
+    -- Start transaction
+    BEGIN
+        -- Insert order and capture order_id
+        INSERT INTO ecommerce.orders (user_id, order_date, total_amount)
+        VALUES (1, CURRENT_TIMESTAMP, 699.99)
+        RETURNING order_id INTO new_order_id;
+
+        -- Insert order item using new_order_id
+        INSERT INTO ecommerce.order_items (order_id, product_id, quantity, unit_price)
+        VALUES (new_order_id, 1, 1, 699.99);
+    END;
+END $$;
+COMMIT;
+
+--Reresh materialized view
+REFRESH MATERIALIZED VIEW ecommerce.sales_by_category;
+
+-- Verify refresh
+SELECT * FROM ecommerce.sales_by_category;
+
+-- Project task: Create dashboard view for top 5 products
+CREATE VIEW ecommerce.dashboard_top_products AS
+SELECT p.product_id, p.name, c.name AS category_name, SUM(oi.quantity * oi.unit_price) AS total_sales
+FROM ecommerce.products p
+INNER JOIN ecommerce.categories c ON p.category_id = c.category_id
+INNER JOIN ecommerce.order_items oi ON p.product_id = oi.product_id
+GROUP BY p.product_id, p.name, c.name
+ORDER BY total_sales DESC
+LIMIT 5;
+
+-- Test dashboard view
+SELECT * FROM ecommerce.dashboard_top_products;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 8: Functions and Stored Procedures
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+-- Practice 1: Function to calculate user’s total order
+CREATE OR REPLACE FUNCTION ecommerce.get_user_total_spent(user_id_param INTEGER) 
+RETURNS NUMERIC AS $$
+DECLARE
+    total_spent NUMERIC;
+BEGIN
+    SELECT SUM(oi.quantity * oi.unit_price) INTO total_spent
+    FROM ecommerce.orders o
+    INNER JOIN ecommerce.order_items oi ON o.order_id = oi.order_id
+    WHERE o.user_id = user_id_param;
+    RETURN COALESCE(total_spent, 0);
+END;
+$$ LANGUAGE plpgsql;
+
+-- Test function
+SELECT username, ecommerce.get_user_total_spent(user_id) AS total_spent
+FROM ecommerce.users;
+
+-- Practice 2: Procedure to restock product
+CREATE OR REPLACE PROCEDURE ecommerce.restock_product(product_id_param INTEGER, amount INTEGER) 
+AS $$
+BEGIN
+    IF amount <= 0 THEN
+        RAISE EXCEPTION 'Restock amount must be positive';
+    END IF;
+    UPDATE ecommerce.products
+    SET stock = stock + amount
+    WHERE product_id = product_id_param;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Product ID % not found', product_id_param;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Test procedure
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 1;
+CALL ecommerce.restock_product(1, 5);
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 1;
+
+-- Project task: Function to apply category discount
+CREATE OR REPLACE FUNCTION ecommerce.apply_category_discount(category_id_param INTEGER, discount_percent NUMERIC) 
+RETURNS INTEGER AS $$
+DECLARE
+    rows_affected INTEGER;
+BEGIN
+    IF discount_percent <= 0 OR discount_percent > 100 THEN
+        RAISE EXCEPTION 'Discount percentage must be between 0 and 100';
+    END IF;
+    UPDATE ecommerce.products
+    SET price = price * (1 - discount_percent / 100)
+    WHERE category_id = category_id_param;
+    GET DIAGNOSTICS rows_affected = ROW_COUNT;
+    RETURN rows_affected;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Test discount function
+SELECT product_id, name, price FROM ecommerce.products WHERE category_id = 1;
+SELECT ecommerce.apply_category_discount(1, 10);
+SELECT product_id, name, price FROM ecommerce.products WHERE category_id = 1;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 9: Triggers
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+-- Practice 1: Trigger to update stock after order
+CREATE FUNCTION ecommerce.update_stock_after_order() RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE ecommerce.products
+    SET stock = stock - NEW.quantity
+    WHERE product_id = NEW.product_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER order_item_stock_trigger
+AFTER INSERT ON ecommerce.order_items
+FOR EACH ROW
+EXECUTE FUNCTION ecommerce.update_stock_after_order();
+
+-- Test stock trigger
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 3;
+BEGIN;
+INSERT INTO ecommerce.orders (user_id, order_date, total_amount) VALUES (1, CURRENT_TIMESTAMP, 19.99);
+INSERT INTO ecommerce.order_items (order_id, product_id, quantity, unit_price)
+VALUES (currval('ecommerce.orders_order_id_seq'), 3, 2, 19.99);
+COMMIT;
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 3;
+
+-- Practice 2: Trigger to log user updates
+CREATE TABLE ecommerce.user_audit (
+    audit_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    old_username VARCHAR(50),
+    new_username VARCHAR(50),
+    old_email VARCHAR(100),
+    new_email VARCHAR(100),
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE FUNCTION ecommerce.log_user_update() RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.username != NEW.username OR OLD.email != NEW.email THEN
+        INSERT INTO ecommerce.user_audit (user_id, old_username, new_username, old_email, new_email)
+        VALUES (OLD.user_id, OLD.username, NEW.username, OLD.email, NEW.email);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER user_update_trigger
+AFTER UPDATE ON ecommerce.users
+FOR EACH ROW
+EXECUTE FUNCTION ecommerce.log_user_update();
+
+-- Test user audit trigger
+SELECT * FROM ecommerce.user_audit;
+UPDATE ecommerce.users SET email = 'john_new@example.com' WHERE user_id = 1;
+SELECT * FROM ecommerce.user_audit;
+
+-- Project task: Trigger to prevent negative stock
+CREATE FUNCTION ecommerce.prevent_negative_stock() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.stock < 0 THEN
+        RAISE EXCEPTION 'Stock cannot be negative for product_id %', NEW.product_id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER prevent_negative_stock_trigger
+BEFORE UPDATE ON ecommerce.products
+FOR EACH ROW
+EXECUTE FUNCTION ecommerce.prevent_negative_stock();
+
+-- Test negative stock trigger
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 1;
+UPDATE ecommerce.products SET stock = -5 WHERE product_id = 1; -- Should fail
+SELECT product_id, name, stock FROM ecommerce.products WHERE product_id = 1;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 10: JSONB and Advanced Data Types
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+-- Practice 1: Add JSONB column and populate
+ALTER TABLE ecommerce.products
+ADD COLUMN IF NOT EXISTS attributes JSONB;
+
+UPDATE ecommerce.products
+SET attributes = CASE product_id
+    WHEN 1 THEN '{"color": "black", "size": "128GB"}'::jsonb
+    WHEN 2 THEN '{"color": "white", "size": "One Size"}'::jsonb
+    WHEN 3 THEN '{"color": "blue", "size": "M"}'::jsonb
+    WHEN 4 THEN '{"color": "black", "size": "32"}'::jsonb
+    WHEN 5 THEN '{"genre": "mystery", "pages": 300}'::jsonb
+    WHEN 6 THEN '{"type": "cookbook", "pages": 200}'::jsonb
+    WHEN 7 THEN '{"color": "silver"}'::jsonb
+    WHEN 8 THEN '{"color": "black"}'::jsonb
+    WHEN 9 THEN '{"color": "blue", "thickness": "5mm"}'::jsonb
+    WHEN 10 THEN '{"material": "carbon", "weight": "300g"}'::jsonb
+END;
+
+-- Verify attributes
+SELECT product_id, name, attributes FROM ecommerce.products;
+
+-- Practice 2: Query products with JSONB operators
+SELECT product_id, name, attributes ->> 'color' AS color
+FROM ecommerce.products
+WHERE attributes @> '{"color": "blue"}';
+
+SELECT product_id, name, attributes #>> '{pages}' AS pages
+FROM ecommerce.products
+WHERE attributes ? 'pages';
+
+-- Practice 3: Create GIN index
+CREATE INDEX idx_products_attributes ON ecommerce.products USING GIN (attributes);
+
+-- Verify index usage
+EXPLAIN ANALYZE
+SELECT product_id, name
+FROM ecommerce.products
+WHERE attributes @> '{"color": "blue"}';
+
+-- Optional: Add more data for index testing
+INSERT INTO ecommerce.products (name, price, stock, description, category_id, attributes)
+SELECT 'Product ' || generate_series(11, 1000), 99.99, 10, 'Test product', 1, '{"color": "blue"}'::jsonb;
+
+--Delete rows
+delete from ecommerce.products where product_id > 12;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 11: Advanced Indexing and Full-Text Search
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+
+-- Practice 1: Full-text search on products.description
+ALTER TABLE ecommerce.products
+ADD COLUMN IF NOT EXISTS description_tsvector tsvector
+GENERATED ALWAYS AS (to_tsvector('english', description)) STORED;
+
+CREATE INDEX IF NOT EXISTS idx_products_description_tsvector ON ecommerce.products USING GIN(description_tsvector);
+
+SELECT product_id, name, description, ts_rank(description_tsvector, to_tsquery('smartphone & 5G')) AS relevance
+FROM ecommerce.products
+WHERE description_tsvector @@ to_tsquery('smartphone & 5G')
+ORDER BY relevance DESC;
+
+-- Practice 2: GiST index for spatial data
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+SELECT * FROM pg_available_extensions WHERE name = 'postgis';
+
+SELECT version();
+
+SELECT current_user, rolsuper FROM pg_roles WHERE rolname = current_user;
+
+CREATE TABLE IF NOT EXISTS ecommerce.stores (
+    store_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location geometry(POINT, 4326)
+);
+
+INSERT INTO ecommerce.stores (name, location) VALUES
+    ('Main Store', ST_SetSRID(ST_MakePoint(-122.4194, 37.7749), 4326)),
+    ('Downtown', ST_SetSRID(ST_MakePoint(-74.0060, 40.7128), 4326)),
+    ('Branch', ST_SetSRID(ST_MakePoint(-87.6298, 41.8781), 4326));
+
+CREATE INDEX idx_stores_location ON ecommerce.stores USING GIST(location);
+
+SELECT name, ST_AsText(location) AS location
+FROM ecommerce.stores
+WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint(-122.4194, 37.7749), 4326), 100000);
+
+-- Practice 3: Compare performance
+EXPLAIN ANALYZE
+SELECT product_id, name
+FROM ecommerce.products
+WHERE description_tsvector @@ to_tsquery('smartphone & 5G');
+
+-- Temporarily drop GIN index for comparison
+DROP INDEX ecommerce.idx_products_description_tsvector;
+
+EXPLAIN ANALYZE
+SELECT product_id, name
+FROM ecommerce.products
+WHERE to_tsvector('english', description) @@ to_tsquery('smartphone & 5G');
+
+CREATE INDEX idx_products_description_tsvector ON ecommerce.products USING GIN(description_tsvector);
+
+EXPLAIN ANALYZE
+SELECT name FROM ecommerce.stores
+WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint(-122.4194, 37.7749), 4326), 100000);
+
+-- Project task: Full-text search function
+CREATE OR REPLACE FUNCTION ecommerce.search_products(search_term TEXT) 
+RETURNS TABLE (product_id INTEGER, name VARCHAR, description TEXT, relevance REAL) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT p.product_id, p.name, p.description, 
+           ts_rank(p.description_tsvector, to_tsquery('english', search_term)) AS relevance
+    FROM ecommerce.products p
+    WHERE p.description_tsvector @@ to_tsquery('english', search_term)
+    ORDER BY relevance DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM ecommerce.search_products('smartphone & 5G');
+
+EXPLAIN ANALYZE
+SELECT * FROM ecommerce.search_products('smartphone & 5G');
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 12: Partitioning and Sharding
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+select * from ecommerce.orders_by_year;
+
+-- Practice 1: Create partitioned orders table
+CREATE TABLE ecommerce.orders_by_year (
+    order_id SERIAL,
+    user_id INTEGER NOT NULL,
+    order_date TIMESTAMP NOT NULL,
+    total_amount NUMERIC NOT NULL
+) PARTITION BY RANGE (order_date);
+
+CREATE TABLE ecommerce.orders_2023 PARTITION OF ecommerce.orders_by_year
+    FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+CREATE TABLE ecommerce.orders_2024 PARTITION OF ecommerce.orders_by_year
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+CREATE TABLE ecommerce.orders_2025 PARTITION OF ecommerce.orders_by_year
+    FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
+
+-- Insert sample data (10,000 rows)
+INSERT INTO ecommerce.orders_by_year (user_id, order_date, total_amount)
+SELECT 
+    (random() * 4 + 1)::INTEGER AS user_id,
+    '2023-01-01'::TIMESTAMP + (random() * (CURRENT_DATE - '2023-01-01')::INTEGER || ' days')::INTERVAL AS order_date,
+    (random() * 1000 + 10)::NUMERIC
+FROM generate_series(1, 10000);
+
+-- Practice 2: Query partitioned data
+SELECT order_id, user_id, order_date, total_amount
+FROM ecommerce.orders_by_year
+WHERE order_date >= '2025-01-01' AND order_date < '2026-01-01';
+
+EXPLAIN ANALYZE
+SELECT * FROM ecommerce.orders_by_year
+WHERE order_date >= '2025-01-01' AND order_date < '2026-01-01';
+
+-- Practice 3: Compare performance
+CREATE TABLE ecommerce.orders_non_partitioned (
+    order_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    order_date TIMESTAMP NOT NULL,
+    total_amount NUMERIC NOT NULL
+);
+
+INSERT INTO ecommerce.orders_non_partitioned (user_id, order_date, total_amount)
+SELECT user_id, order_date, total_amount
+FROM ecommerce.orders_by_year;
+
+EXPLAIN ANALYZE
+SELECT * FROM ecommerce.orders_non_partitioned
+WHERE order_date >= '2025-01-01' AND order_date < '2026-01-01';
+
+CREATE INDEX idx_orders_non_partitioned_date ON ecommerce.orders_non_partitioned (order_date);
+
+EXPLAIN ANALYZE
+SELECT * FROM ecommerce.orders_non_partitioned
+WHERE order_date >= '2025-01-01' AND order_date < '2026-01-01';
+
+-- Project task: Migrate existing orders and add indexes
+INSERT INTO ecommerce.orders_by_year (user_id, order_date, total_amount)
+SELECT user_id, order_date, total_amount
+FROM ecommerce.orders;
+
+CREATE INDEX idx_orders_2023_date ON ecommerce.orders_2023 (order_date);
+CREATE INDEX idx_orders_2024_date ON ecommerce.orders_2024 (order_date);
+CREATE INDEX idx_orders_2025_date ON ecommerce.orders_2025 (order_date);
+
+SELECT * FROM ecommerce.orders_by_year
+WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31';
+
+EXPLAIN ANALYZE
+SELECT * FROM ecommerce.orders_by_year
+WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31';
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 13: Security and User Management
+
+-- Select 
+select * from ecommerce.users;
+select * from ecommerce.categories;
+select * from ecommerce.products;
+select * from ecommerce.orders;
+select * from ecommerce.order_items;
+select * from ecommerce.reviews;
+select * from ecommerce.orders_by_year;
+
+select current_user;
+
+-- Practice 1: Create roles
+CREATE ROLE admin WITH LOGIN PASSWORD 'admin123' INHERIT;
+CREATE ROLE customer WITH LOGIN PASSWORD 'cust123' INHERIT;
+CREATE ROLE guest WITH LOGIN PASSWORD 'guest123';
+GRANT USAGE ON SCHEMA ecommerce TO admin, customer, guest;
+
+-- Practice 2: Grant read-only access to customer for products
+GRANT SELECT ON ecommerce.products TO customer;
+
+-- Practice 3: Implement RLS on orders
+ALTER TABLE ecommerce.orders ENABLE ROW LEVEL SECURITY;
+CREATE POLICY user_orders ON ecommerce.orders
+FOR SELECT TO customer
+USING (user_id = (SELECT user_id FROM ecommerce.users WHERE username = current_user));
+GRANT SELECT ON ecommerce.orders TO customer;
+
+-- Set up users.username for testing
+UPDATE ecommerce.users
+SET username = 'customer' WHERE user_id = 1;
+
+-- Project task: RLS on orders_by_year
+ALTER TABLE ecommerce.orders_by_year ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ecommerce.orders_2023 ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ecommerce.orders_2024 ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ecommerce.orders_2025 ENABLE ROW LEVEL SECURITY;
+CREATE POLICY user_orders_by_year ON ecommerce.orders_by_year
+FOR SELECT TO customer
+USING (user_id = (SELECT user_id FROM ecommerce.users WHERE username = current_user));
+GRANT SELECT ON ecommerce.orders_by_year TO customer;
+GRANT SELECT ON ecommerce.users TO customer;
+
+-- Test as customer (in new connection: username=customer, password=cust123)
+SET search_path TO ecommerce;
+SELECT * FROM ecommerce.products LIMIT 5;
+SELECT * FROM ecommerce.orders;
+SELECT * FROM ecommerce.orders_by_year WHERE order_date >= '2025-01-01' LIMIT 5;
+
+-- Verify as superuser
+SELECT * FROM ecommerce.orders_by_year WHERE user_id = 1 LIMIT 5;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 14: Backup, Restore, and Performance Tuning
+
+-- Practice 1: Backup (run in terminal)
+pg_dump -U postgres -d ecommerce_db > "D:\LEARNING\POSTGRE_SQL\ADVANCED\ecommerce_backup.sql"
+-- Alternative: pg_dump -U postgres -d ecommerce_db > "D:\LEARNING\POSTGRE_SQL\ADVANCED\ecommerce_backup.sql"
+
+-- Practice 2: Restore
+CREATE DATABASE ecommerce_db_restored;
+-- Run in terminal:
+-- psql -U postgres -d ecommerce_db_restored < "D:\LEARNING\POSTGRE_SQL\ADVANCED\ecommerce_backup.sql"
+-- or: pg_restore -U postgres -d ecommerce_db_restored --verbose "D:\LEARNING\POSTGRE_SQL\ADVANCED\ecommerce_backup.sql"
+
+-- Verify restore
+SET search_path TO ecommerce;
+SELECT count(*) FROM orders_by_year; -- Expect ~10,007
+
+-- Practice 3: VACUUM and ANALYZE
+VACUUM ANALYZE ecommerce.products;
+SELECT relname, reltuples, relpages FROM pg_class WHERE relname = 'products';
+EXPLAIN ANALYZE
+SELECT * FROM products WHERE description_tsvector @@ to_tsquery('english', 'smartphone & 5G');
+
+--Backup Script (Windows):
+$BackupDir = "C:\Backups"
+$Timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$BackupFile = "$BackupDir\ecommerce_db_$Timestamp.dump"
+$PgUser = "postgres"
+$DbName = "ecommerce_db"
+New-Item -ItemType Directory -Force -Path $BackupDir
+pg_dump -U $PgUser -Fc -d $DbName -f $BackupFile
+if ($LASTEXITCODE -eq 0) {
+    Write-Output "Backup successful: $BackupFile"
+} else {
+    Write-Output "Backup failed"
+    exit 1
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 15: Project Completion and Review
+
+-- Populate tables
+INSERT INTO ecommerce.users (user_id, username, email, created_at)
+VALUES
+    (1, 'customer', 'customer@example.com', CURRENT_TIMESTAMP),
+    (2, 'jane_smith', 'jane@example.com', CURRENT_TIMESTAMP),
+    (3, 'alice_brown', 'alice@example.com', CURRENT_TIMESTAMP),
+    (4, 'bob_jones', 'bob@example.com', CURRENT_TIMESTAMP),
+    (5, 'emma_wilson', 'emma@example.com', CURRENT_TIMESTAMP)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO ecommerce.products (name, price, stock, description, category_id, attributes)
+SELECT 
+    'Product ' || generate_series(11, 100),
+    (random() * 900 + 100)::NUMERIC,
+    (random() * 50 + 1)::INTEGER,
+    'Sample product description ' || generate_series,
+    (random() * 4 + 1)::INTEGER,
+    '{"color": "random"}'::jsonb
+ON CONFLICT DO NOTHING;
+
+INSERT INTO ecommerce.orders (user_id, order_date, total_amount)
+SELECT 
+    (random() * 4 + 1)::INTEGER,
+    '2025-01-01'::TIMESTAMP + (random() * 180 || ' days')::INTERVAL,
+    (random() * 1000 + 10)::NUMERIC
+FROM generate_series(1, 50)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO ecommerce.order_items (order_id, product_id, quantity, price)
+SELECT 
+    o.order_id,
+    (random() * 99 + 1)::INTEGER,
+    (random() * 5 + 1)::INTEGER,
+    (SELECT price FROM ecommerce.products WHERE product_id = (random() * 99 + 1)::INTEGER)
+FROM ecommerce.orders o
+WHERE o.order_date >= '2025-01-01'
+LIMIT 50;
+
+-- Create reviews table
+CREATE TABLE ecommerce.reviews (
+    review_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    review_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_reviews_user FOREIGN KEY (user_id) REFERENCES ecommerce.users (user_id),
+    CONSTRAINT fk_reviews_product FOREIGN KEY (product_id) REFERENCES ecommerce.products (product_id)
+);
+
+INSERT INTO ecommerce.reviews (user_id, product_id, rating, comment, review_date)
+SELECT 
+    1,
+    1,
+    3,
+    'Sample review ' || generate_series,
+    CURRENT_TIMESTAMP
+FROM generate_series(1, 50)
+ON CONFLICT DO NOTHING;
+
+select * from ecommerce.reviews;
+
+-- Complex queries
+SELECT 
+    u.user_id, 
+    u.username, 
+    SUM(o.total_amount) AS total_spent
+FROM ecommerce.users u
+JOIN ecommerce.orders_by_year o ON u.user_id = o.user_id
+GROUP BY u.user_id, u.username
+ORDER BY total_spent DESC
+LIMIT 5;
+
+SELECT product_id, name, stock
+FROM ecommerce.products
+WHERE stock < 10
+ORDER BY stock ASC;
+
+SELECT 
+    product_id, 
+    name, 
+    description, 
+    ts_rank(description_tsvector, to_tsquery('english', 'smartphone & 5G')) AS relevance
+FROM ecommerce.products
+WHERE description_tsvector @@ to_tsquery('english', 'smartphone & 5G')
+ORDER BY relevance DESC
+LIMIT 5;
+
+-- Verify data
+SELECT 'users' AS table_name, count(*) FROM ecommerce.users
+UNION ALL
+SELECT 'categories', count(*) FROM ecommerce.categories
+UNION ALL
+SELECT 'products', count(*) FROM ecommerce.products
+UNION ALL
+SELECT 'orders', count(*) FROM ecommerce.orders
+UNION ALL
+SELECT 'order_items', count(*) FROM ecommerce.order_items
+UNION ALL
+SELECT 'reviews', count(*) FROM ecommerce.reviews;
+
+--Node.js Server (server.js):
+
+const express = require('express');
+const { Pool } = require('pg');
+const app = express();
+const port = 3000;
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'ecommerce_db',
+  password: 'your_password', // Replace with your postgres password
+  port: 5432
+});
+
+app.get('/products', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT product_id, name, price, description FROM ecommerce.products LIMIT 10');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.stack);
+    res.status(500).send('Error fetching products');
+  }
+});
+
+app.get('/products/search', async (req, res) => {
+  const { query } = req.query;
+  try {
+    const result = await pool.query(
+      `SELECT product_id, name, description, 
+              ts_rank(description_tsvector, to_tsquery('english', $1)) AS relevance
+       FROM ecommerce.products
+       WHERE description_tsvector @@ to_tsquery('english', $1)
+       ORDER BY relevance DESC
+       LIMIT 10`,
+      [query]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.stack);
+    res.status(500).send('Error searching products');
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+
+Terminal (Node.js):
+Initialize project:
+
+mkdir ecommerce-api
+cd ecommerce-api
+npm init -y
+npm install pg express
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+END
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
