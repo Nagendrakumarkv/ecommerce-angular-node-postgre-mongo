@@ -170,9 +170,9 @@ GITHUB
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/Nagendrakumarkv/ecommerce-nest.git
-git remote add origin https://github.com/Nagendrakumarkv/ecommerce-angular.git
-git push -u origin master
+git branch -M main
+git remote add origin https://github.com/Nagendrakumarkv/ecommerce-angular-node-postgre-mongo.git
+git push -u origin main
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
